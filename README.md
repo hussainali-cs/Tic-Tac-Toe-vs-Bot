@@ -7,10 +7,7 @@ Built with **HTML, CSS, and Vanilla JavaScript**, this project focuses on clean 
 ## 🎮 Live Demo
 
 **Play the game:**
-https://YOUR-USERNAME.github.io/tic-tac-toe-ai/
-
-> Replace `YOUR-USERNAME` with your GitHub username.
-
+https://hussainali-cs.github.io/Tic-Tac-Toe-vs-Bot/
 ---
 
 ## ✨ Features
