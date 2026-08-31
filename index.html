@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tic Tac Toe — Play against an AI bot with Easy, Medium and Hard difficulty.">
+  <title>Tic Tac Toe — Hussain Ali</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="background-grid"></div>
+  <div class="glow glow-blue"></div>
+  <div class="glow glow-pink"></div>
+
+  <header class="topbar">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <span>X</span>
+        <span>O</span>
+      </div>
+    </div>
+
+    <div class="game-title">
+      <h1>
+        <span>TIC</span>
+        <strong>TAC</strong>
+        <span>TOE</span>
+      </h1>
+
+      <div class="versus">
+        <span>YOU</span>
+        <b>VS</b>
+        <span>BOT</span>
+      </div>
+    </div>
+
+    <div class="top-actions">
+
+      <button class="icon-btn" id="soundBtn" aria-label="Toggle sound">
+        🔊
+      </button>
+
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+        ☀️
+      </button>
+
+      <a
+        class="icon-btn"
+        href="https://github.com/"
+        target="_blank"
+        rel="noopener"
+        aria-label="GitHub"
+      >
+        ◉
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <main class="game-layout">
+
+    <!-- LEFT PANEL -->
+    <aside class="panel setup-panel">
+
+      <div class="panel-heading">
+        <span class="heading-icon">🎮</span>
+        <h2>GAME SETUP</h2>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="setting-group">
+
+        <label>DIFFICULTY</label>
+
+        <div class="difficulty-buttons">
+
+          <button class="difficulty" data-level="easy">
+            EASY
+          </button>
+
+          <button class="difficulty active" data-level="medium">
+            MEDIUM
+          </button>
+
+          <button class="difficulty" data-level="hard">
+            HARD
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="setting-group">
+
+        <label>CHOOSE YOUR SYMBOL</label>
+
+        <div class="symbol-buttons">
+
+          <button class="symbol active" data-symbol="X">
+            <span class="x-symbol">X</span>
+          </button>
+
+          <button class="symbol" data-symbol="O">
+            <span class="o-symbol">O</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <button class="main-button" id="newGameBtn">
+        <span>↻</span>
+        NEW GAME
+      </button>
+
+      <button class="secondary-button" id="resetScoreBtn">
+        ↻ &nbsp; RESET SCORE
+      </button>
+
+
+      <div class="tip-box">
+
+        <div class="tip-title">
+          <span>💡</span>
+          <b>TIP</b>
+        </div>
+
+        <p>
+          Hard mode uses the
+          <strong>Minimax algorithm.</strong>
+          Can you beat it?
+        </p>
+
+      </div>
+
+    </aside>
+
+
+    <!-- CENTER GAME -->
+    <section class="panel game-panel">
+
+      <div class="turn-indicator" id="turnIndicator">
+        <span class="turn-icon">♙</span>
+        <span id="turnText">YOUR TURN</span>
+      </div>
+
+
+      <div class="board-wrapper">
+
+        <div class="board" id="board">
+
+          <button class="cell" data-index="0"></button>
+          <button class="cell" data-index="1"></button>
+          <button class="cell" data-index="2"></button>
+
+          <button class="cell" data-index="3"></button>
+          <button class="cell" data-index="4"></button>
+          <button class="cell" data-index="5"></button>
+
+          <button class="cell" data-index="6"></button>
+          <button class="cell" data-index="7"></button>
+          <button class="cell" data-index="8"></button>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-message" id="gameMessage">
+        <span>Beat the bot on</span>
+        <strong>MEDIUM</strong>
+        <span>mode to win!</span>
+        <span class="trophy">🏆</span>
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-column">
+
+      <!-- SCORE -->
+      <div class="panel score-panel">
+
+        <div class="panel-heading">
+          <span class="heading-icon">🏆</span>
+          <h2>SCORE BOARD</h2>
+        </div>
+
+        <div class="score-list">
+
+          <div class="score-row player-score">
+            <div class="score-name">
+              <span>♙</span>
+              YOU
+            </div>
+
+            <strong id="playerScore">0</strong>
+          </div>
+
+
+          <div class="score-row bot-score">
+            <div class="score-name">
+              <span>🤖</span>
+              BOT
+            </div>
+
+            <strong id="botScore">0</strong>
+          </div>
+
+
+          <div class="score-row draw-score">
+            <div class="score-name">
+              <span>＝</span>
+              DRAWS
+            </div>
+
+            <strong id="drawScore">0</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATUS -->
+      <div class="panel status-panel">
+
+        <div class="panel-heading">
+          <span class="heading-icon">〽</span>
+          <h2>GAME STATUS</h2>
+        </div>
+
+        <div class="status-box">
+
+          <strong id="statusTitle">
+            YOUR TURN
+          </strong>
+
+          <p id="statusDescription">
+            Make your move!
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- BEST SCORE -->
+      <div class="panel best-panel">
+
+        <div class="panel-heading">
+          <span class="heading-icon">⭐</span>
+          <h2 id="bestTitle">BEST SCORE</h2>
+        </div>
+
+        <div class="best-score">
+
+          <div>
+            <span>🏆</span>
+            <b>YOU</b>
+            <strong id="bestPlayer">0</strong>
+          </div>
+
+          <div>
+            <span>🤖</span>
+            <b>BOT</b>
+            <strong id="bestBot">0</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+  </main>
+
+
+  <div class="result-overlay" id="resultOverlay">
+
+    <div class="result-card">
+
+      <div class="result-icon" id="resultIcon">
+        🏆
+      </div>
+
+      <h2 id="resultTitle">
+        YOU WIN!
+      </h2>
+
+      <p id="resultDescription">
+        Great job!
+      </p>
+
+      <button class="main-button" id="playAgainBtn">
+        PLAY AGAIN
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    <span>Built with HTML, CSS & JavaScript</span>
+    <span>© <span id="year"></span> Hussain Ali</span>
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
